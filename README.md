@@ -31,8 +31,8 @@ Many students struggle to connect with alumni for **mentorship, career guidance,
 
 ### **Clone the Repository**  
 ```bash  
-git clone https://github.com/yourusername/AlumniConnect.git  
-cd AlumniConnect  
+https://github.com/UmeshKumar0143/ReunionHub.git  
+cd ReunionHub  
 ```
 
 ### **Backend Setup**  
