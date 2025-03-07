@@ -33,13 +33,13 @@ Many students struggle to connect with alumni for **mentorship, career guidance,
 Here are some glimpses of **ReunionHub**'s interface:  
 
 ### 🎓 **Student Dashboard**  
-![Student Dashboard](./Screenshots/Student-Dashboard.jpg)  
+![Student Dashboard](./Screenshots/Student%20Dashboard.jpg)  
 
 ### 📅 **Alumni Dashboard (Webinars)**  
-![Alumni Webinars](./Screenshots/Alumni-Dashboard-Webinar.jpg)  
+![Alumni Webinars](./Screenshots/Alumini%20Dashboard%20Webinar.jpg)  
 
 ### 🌟 **Alumni Dashboard (Referrals)**  
-![Alumni Referrals](./Screenshots/Alumni-Dashboard-Referrals.jpg)  
+![Alumni Referrals](./Screenshots/Alumni%20Dashboard%20Reffrals.jpg)  
 
 ### 🌐 **Profile Creation**  
 ![Profile Creation](./Screenshots/Create.jpg)  
