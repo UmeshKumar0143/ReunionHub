@@ -1,4 +1,4 @@
-# **AlumniConnect** 🎓🔗  
+# **ReunionHub** 🎓🔗  
 **Bridging the Gap Between Students and Alumni for Mentorship & Career Growth**  
 
 ## **📌 About the Project**  
@@ -80,7 +80,3 @@ This project is licensed under the **MIT License**.
 
 ---
 
-## **📞 Contact**  
-🔹 **Project Maintainer:** Your Name  
-🔹 **Email:** your.email@example.com  
-🔹 **GitHub:** [Your GitHub Profile](https://github.com/yourusername)  
