@@ -56,16 +56,10 @@ git clone https://github.com/UmeshKumar0143/ReunionHub.git
 cd ReunionHub  
 ```
 
-### 🔹 **Backend Setup**  
+### 🔹 **Project Setup**  
 ```bash  
 npm install  
-npm run dev  # Runs the Next.js backend locally  
-```
-
-### 🔹 **Frontend Setup**  
-```bash  
-npm install  
-npm run dev  # Runs the Next.js frontend locally  
+npm run dev  # Runs the Project  
 ```
 
 ---  
