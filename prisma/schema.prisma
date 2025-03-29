@@ -9,6 +9,7 @@ datasource db {
 
 model Alumni {
   id             String    @id @default(cuid())
+  name           String
   description    String
   major          String
   graduationYear Int
@@ -19,57 +20,13 @@ model Alumni {
   updatedAt      DateTime  @updatedAt
   enroln         Int       @unique
   university     String
-  name           String
+  followers      Follow[]
   comments       Comment[]
   jobPosts       JobPost[]
   webinars       Webinar[]
   post           post[]
-}
-
-model Webinar {
-  id          Int      @id @default(autoincrement())
-  title       String
-  description String
-  date        DateTime
-  alumniId    String
-  link        String
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-  alumni      Alumni   @relation(fields: [alumniId], references: [id])
-}
-
-model JobPost {
-  id          Int      @id @default(autoincrement())
-  title       String
-  description String
-  date        DateTime
-  alumniId    String
-  link        String
-  company     String
-  location    String
-  salary      Float?
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-  alumni      Alumni   @relation(fields: [alumniId], references: [id])
-}
-
-model post {
-  id          Int    @id @default(autoincrement())
-  title       String
-  description String
-  alumniId    String
-  alumni      Alumni @relation(fields: [alumniId], references: [id])
-}
-
-model Comment {
-  id          Int      @id @default(autoincrement())
-  description String
-  studentId   String
-  alumniId    String
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-  alumni      Alumni   @relation(fields: [alumniId], references: [id])
-  student     Student  @relation(fields: [studentId], references: [id])
+  notificationRecived   notification[] @relation("AlumniNotificationsReceived")
+  notificationCreated   notification[] @relation("AlumniNotificationsCreated")
 }
 
 model Student {
@@ -84,4 +41,141 @@ model Student {
   university     String
   name           String
   comments       Comment[]
+  likes          like[]
+  following      Follow[]
+  notificationReceived   notification[] @relation("StudentNotificationsReceived")
+  notificationCreated   notification[]  @relation("StudentNotificationCreated")
 }
+
+model Follow{
+  id         String @id @default(cuid())
+  alumniId   String 
+  studentId  String
+  createdAt DateTime @default(now())
+
+  alumni       Alumni @relation(fields: [alumniId], references: [id], onDelete:Cascade )
+  student     Student @relation(fields: [studentId], references: [id], onDelete: Cascade)
+
+  @@index([alumniId])
+  @@index([studentId])
+  @@unique([alumniId, studentId])
+}
+
+enum NotificationType{
+  LIKE
+  COMMENT
+  FOLLOW
+  NEW_POST
+  NEW_JOB
+  NEW_WEBINAR
+}
+
+enum UserType{
+  Student
+  Alumni
+}
+
+
+model notification {
+    id            String @id @default(cuid())
+    type          NotificationType
+    read          Boolean @default(false)
+
+    postId        String?
+    commentId     String? 
+    jobPostId     String? 
+    webinarPost   String? 
+    createdAt     DateTime @default(now())
+
+    creatorId     String
+    creatorType   UserType
+
+    receiverId    String
+    receiverType  UserType
+
+    creatorAlumni Alumni? @relation("AlumniNotificationsCreated", fields: [creatorId], references: [id], onDelete: Cascade, map: "creatorAlumni")
+    creatorStudent Student? @relation("StudentNotificationCreated",fields: [creatorId], references: [id], onDelete: Cascade, map: "creatorStudent")
+    receiverAlumni Alumni? @relation("AlumniNotificationsReceived", fields: [receiverId], references: [id],onDelete: Cascade, map: "recevierAlumni")
+    receiverStudent Student? @relation("StudentNotificationsReceived", fields: [receiverId], references: [id], onDelete: Cascade, map: "receiverStudent")
+
+    @@index([creatorId])
+    @@index([receiverId])
+     
+} 
+
+
+
+model Webinar {
+  id          String      @id @default(cuid())
+  title       String
+  description String
+  date        DateTime
+  alumniId    String
+  link        String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  alumni      Alumni   @relation(fields: [alumniId], references: [id])
+}
+
+model JobPost {
+  id          String      @id @default(cuid())
+  title       String
+  description String
+  date        DateTime
+  alumniId    String
+  link        String
+  company     String
+  location    String
+  salary      Float?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  alumni      Alumni   @relation(fields: [alumniId], references: [id])
+}
+
+model post {
+  id          String    @id @default(cuid())
+  title       String
+  description String
+  alumniId    String
+  alumni      Alumni @relation(fields: [alumniId], references: [id])
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  likes       like[]
+  comments    Comment[]
+
+  @@index([alumniId])
+}
+
+model like{
+  id        String @id @default(cuid())
+  postId    String
+  StudentId String
+  createdAt DateTime @default(now())
+
+  student Student @relation(fields: [StudentId], references: [id])
+  post     post   @relation(fields: [postId], references: [id])
+
+  @@index([postId])
+  @@index([StudentId])
+
+  @@unique([StudentId,postId])
+}
+
+model Comment {
+  id          String      @id @default(cuid())
+  description String
+  studentId   String
+  alumniId    String
+  postId      String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  alumni      Alumni   @relation(fields: [alumniId], references: [id])
+  student     Student  @relation(fields: [studentId], references: [id])
+  post        post     @relation(fields: [postId], references: [id])
+
+  @@index([alumniId])
+  @@index([studentId])
+}
+
+

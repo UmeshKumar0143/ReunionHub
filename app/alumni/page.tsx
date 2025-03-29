@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import { PlusCircle, Calendar, Briefcase, Users, MessageSquare, Bell, Search, X, Loader2 } from 'lucide-react';
 import { createPost, createWebinar, createJobPosting } from '../Actions/UserPostAction';
-import { getPosts, getReferrals, getWebinars  } from './post';
+import { getPosts, getReferrals, getWebinars  } from '../Actions/post';
 import { UserButton } from '@clerk/nextjs';
 
 function App() {

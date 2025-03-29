@@ -1,7 +1,7 @@
 "use client"
 import Link from "next/link"
 import { useEffect, useState } from "react"
-import { getAlumuni } from "../alumni/action"
+import { getAlumuni } from "../Actions/action"
 import { PersonStanding, Users } from "lucide-react";
 
 interface alumniData {

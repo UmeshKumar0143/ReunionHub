@@ -1,6 +1,6 @@
 "use client"
 import { useEffect, useState } from "react"
-import { getAllPosts } from "../alumni/post";
+import { getAllPosts } from "../Actions/post";
 
 
 export function AlumniPosts() {

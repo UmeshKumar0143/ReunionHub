@@ -1,7 +1,7 @@
 "use client"
 import Link from "next/link"
 import { useEffect, useState } from "react";
-import { getJobPosting, getWebinar } from "../alumni/action";
+import { getJobPosting, getWebinar } from "../Actions/action";
 
 const topRatedAlumni = [
   {
